@@ -1,27 +1,25 @@
-
-class Matriz:
+class MatrizPatrones:
     def __init__(self,nombre, filas, columnas, listaValores=None):
         self.nombre = nombre
         self.filas = filas
         self.columnas = columnas
         self.listaValores = listaValores
 
-class ValorMatriz:
+class ValorMatrizPatrones:
     def __init__(self, fila, columna, valor):
         self.fila = fila
         self.columna = columna
         self.valor = valor
 
-class Nodo:
+class NodoPatrones:
     def __init__(self, matriz=None, siguiente=None):
         self.matriz = matriz
         self.siguiente = siguiente
 
-class NodoValor:
+class NodoValorPatrones:
     def __init__(self, valor=None, siguiente=None):
         self.valor = valor
         self.siguiente = siguiente
-        
 
 class ListaCircular:
     def __init__(self,):
@@ -29,10 +27,10 @@ class ListaCircular:
 
     def agregar(self,nodo):
         if self.primero is None:
-            self.primero = Nodo(matriz=nodo)
+            self.primero = NodoPatrones(matriz=nodo)
             self.primero.siguiente = self.primero
         else:
-            actual = Nodo(matriz=nodo, siguiente=self.primero.siguiente)
+            actual = NodoPatrones(matriz=nodo, siguiente=self.primero.siguiente)
             self.primero.siguiente = actual
 
     def recorre(self):  
@@ -46,19 +44,7 @@ class ListaCircular:
         listaVal = actual.matriz.listaValores
         nodoVal = listaVal.obtenerNodo()
         print(nodoVal.valor.valor, nodoVal.valor.fila, nodoVal.valor.columna)
-        while listaVal != None:
-            '''while fila <= int(actual.matriz.filas) and columna <= int(actual.matriz.columnas):
-                    if int(actual.valor.fila) == fila:
-                        print(actual.valor.valor," ")
-                        columna += 1
-                    if int(actual.valor.fila) == fila and int(actual.valor.columna) == columna:
-                        print(actual.valor.valor,"\n")
-                        columna += 1
-                        fila += 1
-        while actual.siguiente != self.primero:
-            actual = actual.siguiente
-            print("Matriz: ", actual.matriz.nombre, "Filas: ", actual.matriz.filas, "Columnas: ", actual.matriz.columnas)
-            actual.matriz.listaValores.recorrer()'''
+
     def busqueda(self, nombre):
         if self.primero is None:
             return None
@@ -79,7 +65,7 @@ class ListaSimple:
     
     def insertar(self,valor):
         if self.primero is None:
-            self.primero = NodoValor(valor=valor)
+            self.primero = NodoValorPatrones(valor=valor)
             return
         
         actual = self.primero
@@ -87,7 +73,7 @@ class ListaSimple:
         while actual.siguiente:
             actual = actual.siguiente
             
-        actual.siguiente = NodoValor(valor=valor)
+        actual.siguiente = NodoValorPatrones(valor=valor)
 
     def recorrer(self):
         actual = self.primero
@@ -103,19 +89,51 @@ class ListaSimple:
                     print(actual.valor.valor,"\n")
                     columna += 1
                     fila += 1
-
-            '''for i in range(1,int(actual.valor.fila)):
-                if int(actual.valor.fila) == i:
-                    print(actual.valor.valor," ")
-                for j in range(1,int(actual.valor.columna)):
-                    if int(actual.valor.columna) == j:
-                        print(actual.valor.valor," ")'''
-            'print("Fila: ", actual.valor.fila, "Columna: ", actual.valor.columna, "Valor: ", actual.valor.valor)'
-            
             actual = actual.siguiente
 
-    def obtenerNodo(self):
-        actual = self.primero
-        return actual
-    
+def crearPatron(listaCircular):
+    actual = listaCircular.primero
+    listaPatron = ListaCircular()
+    while True:
+        matriz = actual.matriz
+        filas = int(matriz.filas)
+        columnas = int(matriz.columnas)
+        listaValores = matriz.listaValores
+        ListaSimplePatron = ListaSimple()
+        for p in range(1, filas + 1):
+            for c in range(1, columnas + 1):
+                valor = ""
+                nodo_actual = listaValores.primero
+                '''while nodo_actual:
+                    if int(nodo_actual.valor.valor) == 0:
+                        valorP = nodo_actual.valor.valor
+                        valorPatron = ValorMatrizPatrones(p, c, "0")
+                        ListaSimplePatron.insertar(valorPatron)
+                        nodo_actual = nodo_actual.siguiente
+                    elif int(nodo_actual.valor.valor) >= 1:
+                        valor = nodo_actual.valor.valor
+                        valorPatron = ValorMatrizPatrones(p, c, "1")
+                        ListaSimplePatron.insertar(valorPatron)
+                        nodo_actual = nodo_actual.siguiente
+                    nodo_actual = nodo_actual.siguiente'''
+                while nodo_actual:
+                    # Comparar fila y columna para encontrar el valor correcto
+                    if int(nodo_actual.valor.fila) == p and int(nodo_actual.valor.columna) == c:
+                        valor = nodo_actual.valor.valor
+                        # Convertir valor a "0" o "1" según corresponda
+                        if int(valor) == 0:
+                            valorPatron = ValorMatrizPatrones(p, c, "0")
+                        else:
+                            valorPatron = ValorMatrizPatrones(p, c, "1")
+                        ListaSimplePatron.insertar(valorPatron)
+                        break
+                    nodo_actual = nodo_actual.siguiente
+                
+        listaPatron.agregar(MatrizPatrones(matriz.nombre, matriz.filas, matriz.columnas, ListaSimplePatron))
+        actual = actual.siguiente
+        if actual == listaCircular.primero:
+            return listaPatron
+          # Salir del bucle si hemos recorrido toda la lista
+    print("Patrones creados")
+    return None   
 

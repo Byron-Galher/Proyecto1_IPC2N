@@ -1,0 +1,30 @@
+digraph G {
+    // Definir el estilo de los nodos
+    node [shape=plaintext];
+
+    // Definir nodos con contenido de tabla
+    A [label=< 
+        <table border="0" cellborder="1" cellspacing="0">
+            <tr>
+                <td><b>Header 1</b></td>
+                <td><b>Header 2</b></td>
+                <td><b>Header 3</b></td>
+            </tr>
+            <tr>
+                <td>Row 1, Col 1</td>
+                <td>Row 1, Col 2</td>
+                <td>Row 1, Col 3</td>
+            </tr>
+            <tr>
+                <td>Row 2, Col 1</td>
+                <td>Row 2, Col 2</td>
+                <td>Row 2, Col 3</td>
+            </tr>
+        </table>
+    >];
+
+    B [label="Another Node"];
+
+    // Definir aristas (edges)
+    A -> B;
+}

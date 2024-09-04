@@ -3,8 +3,10 @@ import Nodo
 
 
 def ImportarArchivo(ruta):
-    archivo = ET.parse(ruta)
+    import Nodo  # Importar aquí para evitar problemas de importación circular
+    import xml.etree.ElementTree as ET
 
+    archivo = ET.parse(ruta)
     root = archivo.getroot()
 
     listaMatrices = Nodo.ListaCircular()
@@ -14,23 +16,19 @@ def ImportarArchivo(ruta):
         filas = matriz.get('n')
         columnas = matriz.get('m')
 
-        vMatriz = Nodo.Matriz(nombre,filas, columnas, None)
-
+        vMatriz = Nodo.Matriz(nombre, filas, columnas, None)
         listaValores = Nodo.ListaSimple()
+        
         for valor in matriz.findall('dato'):
             fila = valor.get('x')
             columna = valor.get('y')
             valor1 = valor.text
+            listaValores.insertar(Nodo.ValorMatriz(fila, columna, valor1))
 
-            listaValores.insertar(Nodo.ValorMatriz(fila,columna,valor1))
-            
         vMatriz.listaValores = listaValores
-
         listaMatrices.agregar(vMatriz)
 
-    listaMatrices.recorre()
-
-    pass
+    return listaMatrices
     
 
 

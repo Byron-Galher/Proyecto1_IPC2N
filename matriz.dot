@@ -1,0 +1,89 @@
+digraph G {
+    node [shape=plaintext];
+    tabla_matriz [label=<
+        <table border="0" cellborder="0" cellspacing="0">
+            <tr>
+                <td><b>Columna 1</b></td>
+                <td><b>Columna 2</b></td>
+                <td><b>Columna 3</b></td>
+                <td><b>Columna 4</b></td>
+            </tr>
+<tr>
+                <td>2</td>
+                <td>3</td>
+                <td>0</td>
+                <td>4</td>
+            </tr>
+<tr>
+                <td>0</td>
+                <td>0</td>
+                <td>6</td>
+                <td>3</td>
+            </tr>
+<tr>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>5</td>
+            </tr>
+<tr>
+                <td>0</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td colspan="4"><b>Nombre: Matriz 1</b></td>
+            </tr>
+            <tr>
+                <td colspan="4"><b>Columnas: 4</b></td>
+            </tr>
+            <tr>
+                <td colspan="4"><b>Filas: 4</b></td>
+            </tr>
+        </table>
+    >];
+    tabla_patron [label=<
+        <table border="0" cellborder="0" cellspacing="0">
+            <tr>
+                <td><b>Columna 1</b></td>
+                <td><b>Columna 2</b></td>
+                <td><b>Columna 3</b></td>
+                <td><b>Columna 4</b></td>
+            </tr>
+<tr>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+            </tr>
+<tr>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+<tr>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+<tr>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td colspan="4"><b>Nombre: Matriz 1 de Patrones</b></td>
+            </tr>
+            <tr>
+                <td colspan="4"><b>Columnas: 4</b></td>
+            </tr>
+            <tr>
+                <td colspan="4"><b>Filas: 4</b></td>
+            </tr>
+        </table>
+    >];
+}

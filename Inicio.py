@@ -1,5 +1,6 @@
 from Archivo import ImportarArchivo
-
+from Graficador import generar_dot
+import ProcesarArchivo
 
 menu = ("""
     Menu Principal:
@@ -20,7 +21,7 @@ while True:
         ruta = input("Ingrese ruta de archivo\n")
         ArchivoXML = ImportarArchivo(ruta)
     elif respuesta == 2:
-        pass
+        procesar = ProcesarArchivo.crearPatron(ArchivoXML)
     elif respuesta == 3:
         pass
     elif respuesta == 4:
@@ -30,7 +31,16 @@ while True:
         print("Carrera: Ingenieria en Ciencias y Sistemas")
         print("Semestre: 4to Semestre")
     elif respuesta == 5:
-        pass
+        if ArchivoXML is not None:
+            nombreM = input("Ingrese nombre de matriz\n")
+            matriz = ArchivoXML.busqueda(nombreM)
+            matrizPatron = procesar.busqueda(nombreM)
+            if matriz:
+                generar_dot(matriz, matrizPatron,"matriz.dot")
+            else:
+                print("Matriz no encontrada.")
+        else:
+            print("Primero cargue un archivo.")
     elif respuesta == 6:
         break 
 
