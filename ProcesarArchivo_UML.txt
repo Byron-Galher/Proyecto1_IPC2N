@@ -1,0 +1,65 @@
+@startuml
+class MatrizPatrones {
+    comparar_filas()
+    obtener_valores_fila()
+    comparar_valores()
+    es_fila_analizada()
+        nombre
+    filas
+    columnas
+    listaValores
+    __init__()
+}
+class ValorMatrizPatrones {
+        fila
+    columna
+    valor
+    __init__()
+}
+class FilasRepetidas {
+        fila
+    __init__()
+}
+class NodoFilasRepetidas {
+        fila
+    siguiente
+    __init__()
+}
+class ListaSimpleFilasRepetidas {
+    insertar()
+    recorrer()
+    esta_fila_presenta()
+        primero
+    primero
+    __init__()
+}
+class NodoPatrones {
+        matriz
+    siguiente
+    __init__()
+}
+class NodoValorPatrones {
+        valor
+    siguiente
+    __init__()
+}
+class ListaCircular {
+    agregar()
+    recorre()
+    busqueda()
+        primero
+    primero
+    __init__()
+}
+class ListaSimple {
+    insertar()
+    mostrar_datos()
+    crearPatron()
+    sumar_filas()
+    crear_matriz_reducida()
+    Prueba()
+        primero
+    primero
+    __init__()
+}
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+class Matriz {
+        nombre
+    filas
+    columnas
+    listaValores
+    __init__()
+}
+class ValorMatriz {
+        fila
+    columna
+    valor
+    __init__()
+}
+class Nodo {
+        matriz
+    siguiente
+    __init__()
+}
+class NodoValor {
+        valor
+    siguiente
+    __init__()
+}
+class ListaCircular {
+    agregar()
+    recorre()
+    busqueda()
+        primero
+    primero
+    __init__()
+}
+class ListaSimple {
+    insertar()
+    recorrer()
+        primero
+    primero
+    __init__()
+}
+@enduml
