@@ -42,7 +42,7 @@ while True:
         matrizRed = ProcesarArchivo.Prueba(matrizBusqueda,filas)
         nombreRed = nombreRed + "_Reducida"
         matrizR = matrizRed.busqueda(nombreRed)
-        crear_archivo_salida(matrizRed, nombreArchivo)
+        crear_archivo_salida(matrizR, nombreArchivo)
         print("Archivo de salida creado")
     elif respuesta == 4:
         print("Nombre: Byron Miguel Galicia Hernandez")

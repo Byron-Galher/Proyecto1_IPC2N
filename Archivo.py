@@ -3,7 +3,7 @@ import Nodo
 
 
 def ImportarArchivo(ruta):
-    import Nodo  # Importar aquí para evitar problemas de importación circular
+    import Nodo
     import xml.etree.ElementTree as ET
 
     archivo = ET.parse(ruta)
@@ -31,24 +31,40 @@ def ImportarArchivo(ruta):
     return listaMatrices
     
 
+def indent(elem, level=0):
+    """Agrega indentación al XML para mejorar la legibilidad."""
+    i = "\n" + level * "  "
+    if len(elem):
+        if not elem.text or not elem.text.strip():
+            elem.text = i + "  "
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+        for elem in elem:
+            indent(elem, level + 1)
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+    else:
+        if level and (not elem.tail or not elem.tail.strip()):
+            elem.tail = i
+
 def crear_archivo_salida(matriz_reducida, nombre_archivo):
-    # Crear el elemento raíz
     matrices = ET.Element("matrices")
+    nombre_matriz = matriz_reducida.nombre
+    filas = str(matriz_reducida.filas)
+    columnas = str(matriz_reducida.columnas)
+    
+    matriz = ET.SubElement(matrices, "matriz", nombre=nombre_matriz, n=filas, m=columnas)
+    
+    nodo_actual = matriz_reducida.listaValores.primero
+    while nodo_actual:
+        fila = str(nodo_actual.valor.fila)
+        columna = str(nodo_actual.valor.columna)
+        valor = str(nodo_actual.valor.valor)
+        ET.SubElement(matriz, "dato", x=fila, y=columna).text = valor
+        nodo_actual = nodo_actual.siguiente
 
-    # Extraer los valores de la matriz reducida
-    matriz_actual = matriz_reducida.primero
-    while matriz_actual:
-        matriz = ET.SubElement(matrices, "matriz", nombre=matriz_actual.valor.nombre, n=str(matriz_actual.valor.filas), m=str(matriz_actual.valor.columnas))
-        
-        nodo_actual = matriz_actual.valor.listaValores.primero
-        while nodo_actual:
-            # Crear un elemento "dato" para cada valor en la matriz
-            ET.SubElement(matriz, "dato", x=str(nodo_actual.valor.fila), y=str(nodo_actual.valor.columna)).text = str(nodo_actual.valor.valor)
-            nodo_actual = nodo_actual.siguiente
-        
-        matriz_actual = matriz_actual.siguiente
-
-    # Crear el árbol XML y escribir en el archivo
+    indent(matrices)  # Aplica la función de indentación al XML
+    
     tree = ET.ElementTree(matrices)
     with open(nombre_archivo, 'wb') as file:
-        tree.write(file)
+        tree.write(file, encoding='utf-8', xml_declaration=True)

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<matrices>
+  <matriz nombre="Matriz 1_Reducida" n="3" m="4">
+    <dato x="1" y="1">0</dato>
+    <dato x="1" y="2">0</dato>
+    <dato x="1" y="3">9</dato>
+    <dato x="1" y="4">4</dato>
+    <dato x="5" y="1">2</dato>
+    <dato x="5" y="2">3</dato>
+    <dato x="5" y="3">0</dato>
+    <dato x="5" y="4">4</dato>
+    <dato x="2" y="1">1</dato>
+    <dato x="2" y="2">0</dato>
+    <dato x="2" y="3">1</dato>
+    <dato x="2" y="4">5</dato>
+    <dato x="3" y="1">0</dato>
+    <dato x="3" y="2">0</dato>
+    <dato x="3" y="3">3</dato>
+    <dato x="3" y="4">1</dato>
+  </matriz>
+</matrices>

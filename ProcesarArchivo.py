@@ -7,41 +7,31 @@ class MatrizPatrones:
 
 
     def comparar_filas(self):
-        # Lista para almacenar las filas repetidas
+
         filas = int(self.filas)
         columnas = int(self.columnas)
         filas_repetidas = ListaSimpleFilasRepetidas()
-        filas_analizadas = ListaSimpleFilasRepetidas()  # Para marcar filas ya verificadas
+        filas_analizadas = ListaSimpleFilasRepetidas() 
 
-        # Iterar sobre las filas de la matriz
         for i in range(1, filas + 1):
-            # Extraer valores de la fila actual
             valores_fila_actual = self.obtener_valores_fila(i)
             
-            # Verificar si esta fila ya ha sido analizada
             if self.es_fila_analizada(i, filas_analizadas):
-                continue  # Saltar si ya fue analizada
+                continue
 
-            # Comparar la fila actual con las otras filas
             for j in range(i + 1, filas + 1):
                 valores_fila_comparar = self.obtener_valores_fila(j)
-                # Comparar las filas para ver si son iguales
                 if self.comparar_valores(valores_fila_actual, valores_fila_comparar):
-                    # Agregar las filas repetidas si aún no están marcadas
                     if not self.es_fila_analizada(i, filas_repetidas):
                         filas_repetidas.insertar(FilasRepetidas(i))
                     if not self.es_fila_analizada(j, filas_repetidas):
                         filas_repetidas.insertar(FilasRepetidas(j))
             
-            # Marcar la fila como analizada
             filas_analizadas.insertar(FilasRepetidas(i))
         
-        # Imprimir o retornar las filas repetidas
-        #filas_repetidas.recorrer()
         return filas_repetidas
 
     def obtener_valores_fila(self, fila):
-        # Extrae los valores de una fila específica en una ListaSimple
         valores = ListaSimple()
         actual = self.listaValores.primero
         while actual:
@@ -51,7 +41,6 @@ class MatrizPatrones:
         return valores
 
     def comparar_valores(self, lista1, lista2):
-        # Compara los valores de dos listas simples de la misma longitud
         nodo1 = lista1.primero
         nodo2 = lista2.primero
         while nodo1 and nodo2:
@@ -62,7 +51,6 @@ class MatrizPatrones:
         return nodo1 is None and nodo2 is None
 
     def es_fila_analizada(self, fila, lista):
-        # Verifica si una fila ya está en la lista de filas analizadas
         actual = lista.primero
         while actual:
             if actual.fila.fila == fila:
@@ -156,9 +144,9 @@ class ListaCircular:
         actual = self.primero
         while True:
             if actual.matriz.nombre == nombre:
-                return actual.matriz  # Devuelve el objeto Matriz
+                return actual.matriz
             actual = actual.siguiente
-            if actual == self.primero:  # Salir del bucle si hemos recorrido toda la lista
+            if actual == self.primero:
                 break
         return None
 
@@ -203,10 +191,8 @@ def crearPatron(listaCircular):
                 valor = ""
                 nodo_actual = listaValores.primero
                 while nodo_actual:
-                    # Comparar fila y columna para encontrar el valor correcto
                     if int(nodo_actual.valor.fila) == p and int(nodo_actual.valor.columna) == c:
                         valor = nodo_actual.valor.valor
-                        # Convertir valor a "0" o "1" según corresponda
                         if int(valor) == 0:
                             valorPatron = ValorMatrizPatrones(p, c, "0")
                         else:
@@ -219,7 +205,6 @@ def crearPatron(listaCircular):
         actual = actual.siguiente
         if actual == listaCircular.primero:
             return listaPatron
-          # Salir del bucle si hemos recorrido toda la lista
     print("Patrones creados")
     return None   
 
@@ -297,12 +282,10 @@ def Prueba(matriz, filas_a_sumar):
     filaRep = filas_a_sumar.primero
     contadorFilas = 0
 
-    # Recorrer cada fila repetida
     while filaRep:
         fila_actual = int(filaRep.fila.fila)
         nodo_actual = listaValores.primero
         
-        # Recorrer los valores de listaValores
         while nodo_actual:
             if int(nodo_actual.valor.fila) == fila_actual:
                 listaFilasRepetidas.insertar(ValorMatrizPatrones(
@@ -314,7 +297,6 @@ def Prueba(matriz, filas_a_sumar):
         contadorFilas += 1
         filaRep = filaRep.siguiente
 
-    # Crear una nueva lista para almacenar la suma de valores por columna
     nueva_lista = ListaSimple()
     columna_actual = 1
 
@@ -322,51 +304,25 @@ def Prueba(matriz, filas_a_sumar):
         suma_columna = 0
         nodo_actual = listaFilasRepetidas.primero
         
-        # Sumar los valores de la misma columna
         while nodo_actual:
             if int(nodo_actual.valor.columna) == columna_actual:
                 suma_columna += int(nodo_actual.valor.valor)
             nodo_actual = nodo_actual.siguiente
         
-        # Insertar la suma en la nueva lista
-        nueva_lista.insertar(ValorMatrizPatrones(1, columna_actual, suma_columna))  # Usamos fila = 1 para representar la fila resultante
-        
+        nueva_lista.insertar(ValorMatrizPatrones(1, columna_actual, suma_columna)) 
         columna_actual += 1
     
-    # Imprimir los resultados de la nueva lista
     actual = nueva_lista.primero
     numeroFilas = 0
     while actual:
         numeroFilas += 1
         actual = actual.siguiente
 
-    # Crear la matriz reducida
     filasMatrizReducida = (filasM - contadorFilas) + 1
     matriz_reducida = ListaCircular()
     listaValoresReducida = ListaSimple()
     filaRep = filas_a_sumar.primero
 
-    # Recorrer los valores restantes de la matriz original
-    '''while filaRep:
-        fila_actual = int(filaRep.fila.fila)
-        nodo_actual = listaValores.primero
-
-        for p in range(1, filasM + 1):
-            for c in range(1, columnasM + 1):
-                valor = ""
-                nodo_actual = listaValores.primero
-                while nodo_actual:
-                    # Comparar fila y columna para encontrar el valor correcto
-                    if int(nodo_actual.valor.fila) == p and int(nodo_actual.valor.columna) == c:
-                        if int(nodo_actual.valor.fila) == filaRep.fila.fila:
-                            pass
-                        else:
-                            valorPatron = ValorMatrizPatrones(p+numeroFilas, c, nodo_actual.valor.valor)
-                        listaValoresReducida.insertar(valorPatron)
-                        break
-                    nodo_actual = nodo_actual.siguiente
-        filaRep = filaRep.siguiente'''
-    #agregar a lista de valores reducida
     nueva_lista_actual = nueva_lista.primero
     while nueva_lista_actual:
         listaValoresReducida.insertar(nueva_lista_actual.valor)
@@ -383,13 +339,12 @@ def Prueba(matriz, filas_a_sumar):
             for c in range(1, columnasM + 1):
                 nodo_actual = listaValores.primero
                 while nodo_actual:
-                    # Comparar fila y columna para encontrar el valor correcto
                     if int(nodo_actual.valor.fila) == p and int(nodo_actual.valor.columna) == c:
                         if int(nodo_actual.valor.fila) != fila_actual:
-                            print("Fila", nodo_actual.valor.fila, "Columna", nodo_actual.valor.columna, "Valor", nodo_actual.valor.valor)
+                            #print("Fila", nodo_actual.valor.fila, "Columna", nodo_actual.valor.columna, "Valor", nodo_actual.valor.valor)
                             valorPatron = ValorMatrizPatrones(p + contadorFilas, c, nodo_actual.valor.valor)
                             listaValoresReducida.insertar(valorPatron)
-                        break  # Salir del bucle interno para evitar múltiples inserciones
+                        break
                     nodo_actual = nodo_actual.siguiente
             contadorFilas =-1
         filaRep = filaRep.siguiente
@@ -398,7 +353,6 @@ def Prueba(matriz, filas_a_sumar):
         else:
             validar = False
     
-    # Crear la matriz reducida
     matriz_reducida.agregar(MatrizPatrones(
         matriz.nombre + "_Reducida",
         filasMatrizReducida,
