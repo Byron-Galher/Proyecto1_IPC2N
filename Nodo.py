@@ -103,19 +103,6 @@ class ListaSimple:
                     print(actual.valor.valor,"\n")
                     columna += 1
                     fila += 1
-
-            '''for i in range(1,int(actual.valor.fila)):
-                if int(actual.valor.fila) == i:
-                    print(actual.valor.valor," ")
-                for j in range(1,int(actual.valor.columna)):
-                    if int(actual.valor.columna) == j:
-                        print(actual.valor.valor," ")'''
-            'print("Fila: ", actual.valor.fila, "Columna: ", actual.valor.columna, "Valor: ", actual.valor.valor)'
-            
             actual = actual.siguiente
-
-    def obtenerNodo(self):
-        actual = self.primero
-        return actual
     
 

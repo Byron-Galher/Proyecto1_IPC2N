@@ -1,4 +1,4 @@
-from Archivo import ImportarArchivo
+from Archivo import ImportarArchivo, crear_archivo_salida
 from Graficador import generar_dot
 import ProcesarArchivo
 
@@ -21,9 +21,29 @@ while True:
         ruta = input("Ingrese ruta de archivo\n")
         ArchivoXML = ImportarArchivo(ruta)
     elif respuesta == 2:
+        print
         procesar = ProcesarArchivo.crearPatron(ArchivoXML)
+        
+        nombreM = input("Ingrese nombre de matriz\n")
+        matriz = ArchivoXML.busqueda(nombreM)
+        matrizPatron = procesar.busqueda(nombreM)
+        print("Obtiene matriz a procesar")
+        filas = matrizPatron.comparar_filas()
+        print("Realiza comparacion de patrones de filas")
+        matrizRed = ProcesarArchivo.Prueba(matriz,filas)
+        print("Obtiene matriz reducida")
+        #imprimir = matrizRed.recorre()
+        
     elif respuesta == 3:
-        pass
+        nombreArchivo = input("Ingrese nombre de archivo de salida\n")
+        nombreRed = input("Ingrese nombre de matriz\n")
+        matrizBusqueda = ArchivoXML.busqueda(nombreRed)
+        filas = matrizPatron.comparar_filas()
+        matrizRed = ProcesarArchivo.Prueba(matrizBusqueda,filas)
+        nombreRed = nombreRed + "_Reducida"
+        matrizR = matrizRed.busqueda(nombreRed)
+        crear_archivo_salida(matrizRed, nombreArchivo)
+        print("Archivo de salida creado")
     elif respuesta == 4:
         print("Nombre: Byron Miguel Galicia Hernandez")
         print("Carnet: 209107177")
@@ -31,17 +51,24 @@ while True:
         print("Carrera: Ingenieria en Ciencias y Sistemas")
         print("Semestre: 4to Semestre")
     elif respuesta == 5:
-        if ArchivoXML is not None:
-            nombreM = input("Ingrese nombre de matriz\n")
-            matriz = ArchivoXML.busqueda(nombreM)
-            matrizPatron = procesar.busqueda(nombreM)
+        nombreRed = input("Ingrese nombre de matriz\n")
+        matrizBusqueda = ArchivoXML.busqueda(nombreRed)
+        filas = matrizPatron.comparar_filas()
+        matrizRed = ProcesarArchivo.Prueba(matrizBusqueda,filas)
+        nombreRed = nombreRed + "_Reducida"
+        matrizR = matrizRed.busqueda(nombreRed)
+
+        if ArchivoXML is not None:            
             if matriz:
-                generar_dot(matriz, matrizPatron,"matriz.dot")
+                generar_dot(matrizBusqueda, matrizR,"matriz.dot")
             else:
                 print("Matriz no encontrada.")
         else:
             print("Primero cargue un archivo.")
     elif respuesta == 6:
-        break 
+        break
+    else:
+        print("Opcion no valida")
+        pass 
 
 

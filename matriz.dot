@@ -52,37 +52,31 @@ digraph G {
                 <td><b>Columna 4</b></td>
             </tr>
 <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>0</td>
-                <td>1</td>
-            </tr>
-<tr>
                 <td>0</td>
                 <td>0</td>
-                <td>1</td>
-                <td>1</td>
+                <td>9</td>
+                <td>4</td>
             </tr>
 <tr>
                 <td>1</td>
                 <td>0</td>
                 <td>1</td>
-                <td>1</td>
+                <td>5</td>
             </tr>
 <tr>
                 <td>0</td>
                 <td>0</td>
-                <td>1</td>
+                <td>3</td>
                 <td>1</td>
             </tr>
             <tr>
-                <td colspan="4"><b>Nombre: Matriz 1 de Patrones</b></td>
+                <td colspan="4"><b>Nombre: Matriz 1_Reducida de Patrones</b></td>
             </tr>
             <tr>
                 <td colspan="4"><b>Columnas: 4</b></td>
             </tr>
             <tr>
-                <td colspan="4"><b>Filas: 4</b></td>
+                <td colspan="4"><b>Filas: 3</b></td>
             </tr>
         </table>
     >];
